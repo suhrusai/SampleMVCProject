@@ -30,8 +30,7 @@ jobs:
         uses: actions/setup-python@v2.3.1
       - name : Run Python Command 
         run : | 
-          python 
-          "hello.py"
+          python "hello.py"
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
         
