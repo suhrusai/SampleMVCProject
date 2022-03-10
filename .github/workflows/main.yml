@@ -32,7 +32,7 @@ jobs:
         
       - name: Setup NUGet
         uses: NuGet/setup-nuget@v1.0.5
-        
+       
       - name: Adding Factset Packagesource
         run : nuget sources add -name "Factset" -Source http://artifactory.factset.com/artifactory/api/nuget/nuget
 
@@ -41,7 +41,8 @@ jobs:
         
       - name: Restore NuGet Packages
         run: nuget restore SampleMVCProject.sln
-        
+      - name: "git Clone"
+        run : gh repo clone suhrusai/DevConnector1
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
         
