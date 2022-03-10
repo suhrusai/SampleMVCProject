@@ -34,7 +34,10 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
         
       - name: Adding Factset Packagesource
-        run: dotnet nuget add source 'http://artifactory.factset.com/artifactory/api/nuget/nuget' --name 'Factset'
+        run : nuget sources add -name "Factset" -Source http://artifactory.factset.com/artifactory/api/nuget/nuget
+
+
+#         run: dotnet nuget add source 'http://artifactory.factset.com/artifactory/api/nuget/nuget' --name 'Factset'
         
       - name: Restore NuGet Packages
         run: nuget restore SampleMVCProject.sln
