@@ -24,9 +24,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v2
+        with:
+          repository : suhrusai/Monster-Chase
+          path: C:\Users\ssala
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
         
@@ -43,6 +46,7 @@ jobs:
         run: nuget restore SampleMVCProject.sln
       - name: "git Clone"
         run : gh repo clone suhrusai/DevConnector1
+        
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
         
