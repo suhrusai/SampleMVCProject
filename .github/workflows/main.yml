@@ -28,9 +28,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup Python
         uses: actions/setup-python@v2.3.1
-      - name : Run Python Command 
-        run : | 
-          python "hello.py"
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
         
