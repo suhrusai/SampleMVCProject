@@ -53,16 +53,23 @@ jobs:
         with:
           name: "Hello.zip"
           path: "./archive.zip"
-  build_success:
+  deploy_on_omen:
     needs: build
-    runs-on : [deployment-test,deployment-test1]
+    runs-on : [deployment-test]
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
           name: "Hello.zip"
-      - name: Fun Pop up for verification
-        run : powershell -WindowStyle hidden -Command "& {[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Wow It is Successfull','WARNING')}"
+  deploy_on_ssala:
+    needs: build
+    runs-on : [deployment-test1]
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: "Hello.zip"    
+
        #   with:
         #   name: webapp
          #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
