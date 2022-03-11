@@ -1,0 +1,13 @@
+deploy:
+    needs: build
+    runs-on : ${{matrix.computername}}
+    strategy:
+      matrix:
+        computername: [deployment-test,deployment-test1]
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: "Build.zip"
+      - name: Decompress download build zip
+        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
