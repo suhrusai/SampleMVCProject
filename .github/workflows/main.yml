@@ -51,7 +51,7 @@ jobs:
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: "Hello.zip"
+          name: "Build.zip"
           path: "./archive.zip"
 #   deploy_on_omen:
 #     needs: build
@@ -71,7 +71,9 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: "Hello.zip"    
+          name: "Build.zip"
+      - name: Decompress download build zip
+        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\"
 
        #   with:
         #   name: webapp
