@@ -43,13 +43,26 @@ jobs:
         
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
-      - name :  Zip Bin folder
-        run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
 
       - name: Build and Publish to folder
         run: msbuild ${{ env.WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
+      - name :  Zip Bin folder
+        run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
       - name: Publish artifacts
-        uses: actions/upload-artifact@v1.0.0
-     #   with:
-      #   name: webapp
-       #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
+        uses: actions/upload-artifact@v2
+        with:
+          name: "My artifact"
+          path: "./archive.zip"
+  build_success:
+    needs: build
+    runs-on : deployment-test
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifacts@v2
+        with:
+          name: "Hello.zip"
+      - name: Fun Pop up for verification
+        run : powershell -WindowStyle hidden -Command "& {[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Wow It is Successfull','WARNING')}"
+       #   with:
+        #   name: webapp
+         #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
