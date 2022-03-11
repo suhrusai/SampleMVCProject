@@ -46,9 +46,8 @@ jobs:
         
       - name: Build and Publish to folder
         run: msbuild ${{ env.WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
-        
-   #   - name: Publish artifacts
-    #    uses: actions/upload-artifact@v1.0.0
+      - name: Publish artifacts
+        uses: actions/upload-artifact@v1.0.0
      #   with:
       #   name: webapp
        #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
