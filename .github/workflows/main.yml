@@ -40,8 +40,6 @@ jobs:
         
       - name: Restore NuGet Packages
         run: nuget restore SampleMVCProject.sln
-      - name: "git Clone"
-        run : gh repo clone suhrusai/DevConnector1
         
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
