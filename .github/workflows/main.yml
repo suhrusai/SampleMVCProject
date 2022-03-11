@@ -55,7 +55,7 @@ jobs:
           path: "./archive.zip"
   build_success:
     needs: build
-    runs-on : deployment-test
+    runs-on : [deployment-test,deployment-test1]
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
