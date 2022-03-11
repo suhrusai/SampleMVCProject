@@ -43,7 +43,7 @@ jobs:
         
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
-      -name :  Zip Bin folder
+      - name :  Zip Bin folder
         run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
 
       - name: Build and Publish to folder
