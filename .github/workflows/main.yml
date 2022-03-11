@@ -73,7 +73,7 @@ jobs:
         with:
           name: "Build.zip"
       - name: Decompress download build zip
-        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\"
+        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
 
        #   with:
         #   name: webapp
