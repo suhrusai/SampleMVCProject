@@ -53,17 +53,20 @@ jobs:
         with:
           name: "Hello.zip"
           path: "./archive.zip"
-  deploy_on_omen:
+#   deploy_on_omen:
+#     needs: build
+#     runs-on : [deployment-test]
+#     steps:
+#       - name: Download Artifacts
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: "Hello.zip"
+  deploy:
     needs: build
-    runs-on : [deployment-test]
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: "Hello.zip"
-  deploy_on_ssala:
-    needs: build
-    runs-on : [deployment-test1]
+    runs-on : ${{matrix.computername}}
+    strategy:
+      matrix:
+        computername: [deployment-test,deploymenttest1]
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
