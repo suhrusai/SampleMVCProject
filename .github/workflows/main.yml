@@ -43,7 +43,9 @@ jobs:
         
       - name: Build Solution
         run: msbuild SampleMVCProject.sln /p:Configuration=Release
-        
+      -name :  Zip Bin folder
+        run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
+
       - name: Build and Publish to folder
         run: msbuild ${{ env.WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
       - name: Publish artifacts
