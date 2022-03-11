@@ -51,7 +51,7 @@ jobs:
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: "My artifact"
+          name: "Hello.zip"
           path: "./archive.zip"
   build_success:
     needs: build
