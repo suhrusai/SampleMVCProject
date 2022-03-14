@@ -68,7 +68,7 @@ jobs:
   deploy:
     needs: build
     runs-on : ${{needs.build.outputs.matrix}}
-    if: needs.build.outputs.matrix == 'development-test1'
+    if: needs.build.outputs.matrix == 'deployment-test1'
     strategy:
       matrix:
         computername: [deployment-test1]
