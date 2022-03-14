@@ -31,7 +31,7 @@ jobs:
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
       - id: set-matrix
-        run: echo "::set-output name=matrix::[\"deployment-test1\",\"deployment-test1\"]"        
+        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       - name: Setup NUGet
         uses: NuGet/setup-nuget@v1.0.5
        
@@ -73,7 +73,7 @@ jobs:
         computername: [deployment-test1]
     steps:
       - name : matrix output
-        run: ${{needs.build.outputs.matrix}}
+        run: ${{fromJson(needs.build.outputs.matrix)}}
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
