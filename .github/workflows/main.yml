@@ -24,12 +24,12 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployement-test1"},{"project":"bar","config":"deployement-test1"}]}'
+        run: echo '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployement-test1"},{"project":"bar","servername":"deployement-test1"}]}'
   job2:
     needs: job1
     strategy:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
-    runs-on: ${{matrix.config}}
+    runs-on: ${{matrix.servername}}
 
     steps:
       - name : Nameee!!!!
