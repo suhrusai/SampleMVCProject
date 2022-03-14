@@ -30,6 +30,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
+    steps:
+      - name : Nameee!!!!
+        run : echo "hello"
 #     steps:
 #       - run: build
 #   # This workflow contains a single job called "build"
