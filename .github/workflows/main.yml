@@ -55,7 +55,7 @@ jobs:
             }
           }
 
-          Write-Host ::set-output name=matrix::$($($Jobs | ConvertTo-JSON -Compress)).Replace("\"","\\\""))
+          Write-Host ::set-output name=matrix::$($($Jobs | ConvertTo-JSON -Compress)).Replace("\"","\\\"")))
       - name: Restore NuGet Packages
         run: nuget restore SampleMVCProject.sln
         
