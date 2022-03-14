@@ -73,7 +73,7 @@ jobs:
         computername: [deployment-test,deployment-test1]
     steps:
       - name : matrix output
-        run: ${{fromJson(needs.build.outputs.matrix)}}
+        run: ${{needs.build.outputs.matrix}}
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
