@@ -25,6 +25,7 @@ jobs:
       - id: set-matrix
         run: |
           $a = Get-content main.json -Raw
+          $a = $a -replace '(^\s+|\s+$)','' -replace '\s+','' -replace '\n',""
           echo "::set-output name=matrix::$a"
 #         '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployment-test1"},{"project":"bar","servername":"deployment-test1"}]}'
   job2:
