@@ -70,6 +70,8 @@ jobs:
 #         with:
 #           name: "Hello.zip"
   deploy:
+    env:
+      REPO_SECRET : ${{ secrets.REPO_SECRET }}
     environment : Test
     needs: build
     runs-on : ${{env.REPO_SECRET}}
