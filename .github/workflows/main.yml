@@ -21,6 +21,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: self-hosted
+    outputs: 
+      computername: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,7 +31,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
-        
+      - id: set-matrix
+        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"        
       - name: Setup NUGet
         uses: NuGet/setup-nuget@v1.0.5
        
@@ -53,6 +57,7 @@ jobs:
         with:
           name: "Build.zip"
           path: "./archive.zip"
+#       -name: 
 #   deploy_on_omen:
 #     needs: build
 #     runs-on : [deployment-test]
@@ -68,6 +73,8 @@ jobs:
       matrix:
         computername: [deployment-test,deployment-test1]
     steps:
+      - name : matrix output
+        run: ${{fromJson(needs.build.outputs.matrix)}}
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
