@@ -31,7 +31,7 @@ jobs:
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
       - id: set-matrix
-        run: echo "::set-output name=matrix::[deployment-test1]"        
+        run: echo "::set-output name=matrix::deployment-test1,deployment-test1"        
       - name: Setup NUGet
         uses: NuGet/setup-nuget@v1.0.5
        
