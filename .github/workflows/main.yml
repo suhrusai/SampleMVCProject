@@ -69,25 +69,25 @@ jobs:
 #         uses: actions/download-artifact@v2
 #         with:
 #           name: "Hello.zip"
-  deploy:
-    environment : Test
-    needs: build
-    runs-on : ${{secrets.REPO_SECRET}}
-#     strategy:
-#       matrix:
-#         computername: [deployment-test1]
-    steps:
-      - name : matrix output
-        run: echo ${{needs.build.outputs.matrix}}
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: "Build.zip"
-      - name: Github Secret
-        run: echo {{ secret.SERVER_NAMES }}
-      - name: Decompress download build zip
-        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
+#   deploy:
+#     environment : Test
+#     needs: build
+#     runs-on : ${{secrets.REPO_SECRET}}
+# #     strategy:
+# #       matrix:
+# #         computername: [deployment-test1]
+#     steps:
+#       - name : matrix output
+#         run: echo ${{needs.build.outputs.matrix}}
+#       - name: Download Artifacts
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: "Build.zip"
+#       - name: Github Secret
+#         run: echo {{ secret.SERVER_NAMES }}
+#       - name: Decompress download build zip
+#         run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
 
-       #   with:
-        #   name: webapp
-         #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
+#        #   with:
+#         #   name: webapp
+#          #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
