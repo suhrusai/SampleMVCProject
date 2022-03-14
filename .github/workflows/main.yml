@@ -19,7 +19,7 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   job1:
-    runs-on: windows-latest
+    runs-on: sellf-hosted
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -33,7 +33,7 @@ jobs:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
     steps:
       - name : Nameee!!!!
-        run : echo "hello"
+        run : echo ${{matrix.config}}
 #     steps:
 #       - run: build
 #   # This workflow contains a single job called "build"
