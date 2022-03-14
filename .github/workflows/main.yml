@@ -24,7 +24,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo '::set-output name=matrix::{"include":[{"project":"foo","server":"deployment-test1"},{"project":"bar","server":"deployment-test1"}]}'
+        run: echo '::set-output name=matrix::{"include":[{"project":"foo","label":"deployment-test11"},{"project":"bar","label":"deployment-test11"}]}'
   job2:
     needs: job1
     strategy:
