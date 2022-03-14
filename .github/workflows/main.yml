@@ -24,7 +24,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
     outputs: 
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+#       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix-json: ${{ steps.set-matrix.outputs.matrix }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -44,7 +45,17 @@ jobs:
 
 
 #         run: dotnet nuget add source 'http://artifactory.factset.com/artifactory/api/nuget/nuget' --name 'Factset'
-        
+      - name: Creating matrix
+        run: |
+          $Jobs = @()
+
+          @('seployment-test1') | ForEach-Object {
+            $Jobs += @{
+              computername = "$_"
+            }
+          }
+
+          Write-Host "::set-output name=matrix::$($Jobs | ConvertTo-JSON -Compress))"
       - name: Restore NuGet Packages
         run: nuget restore SampleMVCProject.sln
         
@@ -69,26 +80,26 @@ jobs:
 #         uses: actions/download-artifact@v2
 #         with:
 #           name: "Hello.zip"
+
   deploy:
-    env:
-      REPO_SECRET : ${{ secrets.REPO_SECRET }}
-    environment : Test
-    needs: build
-    runs-on: ${{needs.build.outputs.matrix}}
+      needs: build
+      strategy:
+        fail-fast: false
+        matrix:
+          include: ${{ fromJson(needs.matrix.outputs.matrix-json) }}
+      runs-on: ${{needs.build.outputs.matrix}}
 #     strategy:
-#       matrix:
-#         computername: [deployment-test1]
-    steps:
-      - name : matrix output
-        run: echo ${{needs.build.outputs.matrix}}
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: "Build.zip"
-      - name: Github Secret
-        run: echo {{ secret.SERVER_NAMES }}
-      - name: Decompress download build zip
-        run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
+      steps:
+        - name : matrix output
+          run: echo ${{needs.build.outputs.matrix}}
+        - name: Download Artifacts
+          uses: actions/download-artifact@v2
+          with:
+            name: "Build.zip"
+        - name: Github Secret
+          run: echo {{ secret.SERVER_NAMES }}
+        - name: Decompress download build zip
+          run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
 
        #   with:
         #   name: webapp
