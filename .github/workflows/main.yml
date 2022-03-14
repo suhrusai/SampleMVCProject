@@ -35,7 +35,7 @@ jobs:
       - name: Setup MSBUild
         uses: microsoft/setup-msbuild@v1.1
       - id: set-matrix
-        run: echo "::set-output name=matrix::[deployment-test1]"
+        run: echo ::set-output name=matrix::${{ env.REPO_SECRET }}
       - name: Setup NUGet
         uses: NuGet/setup-nuget@v1.0.5
        
@@ -74,7 +74,7 @@ jobs:
       REPO_SECRET : ${{ secrets.REPO_SECRET }}
     environment : Test
     needs: build
-    runs-on : ${{env.REPO_SECRET}}
+    runs-on: ${{needs.build.outputs.matrix}}
 #     strategy:
 #       matrix:
 #         computername: [deployment-test1]
