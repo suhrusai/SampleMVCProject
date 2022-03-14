@@ -66,6 +66,7 @@ jobs:
 #         with:
 #           name: "Hello.zip"
   deploy:
+    environment : Test
     needs: build
     runs-on : ${{needs.build.outputs.matrix}}
     strategy:
@@ -78,6 +79,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: "Build.zip"
+      - name: Github Secret
+        run: echo {{ secret.SERVER_NAMES }}
       - name: Decompress download build zip
         run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
 
