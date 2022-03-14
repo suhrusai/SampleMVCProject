@@ -71,10 +71,10 @@ jobs:
   deploy:
     environment : Test
     needs: build
-    runs-on : ${{needs.build.outputs.matrix}}
-    strategy:
-      matrix:
-        computername: [deployment-test1]
+    runs-on : ${{secrets.REPO_SECRET}}
+#     strategy:
+#       matrix:
+#         computername: [deployment-test1]
     steps:
       - name : matrix output
         run: echo ${{needs.build.outputs.matrix}}
