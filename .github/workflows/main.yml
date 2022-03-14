@@ -70,10 +70,10 @@ jobs:
     runs-on : ${{matrix.computername}}
     strategy:
       matrix:
-        computername: [deployment-test,deployment-test1]
+        computername: [deployment-test1]
     steps:
       - name : matrix output
-        run: ${{needs.build.outputs.matrix}}
+        run: ${{fromJson(needs.build.outputs.matrix)}}
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
