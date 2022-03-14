@@ -29,7 +29,8 @@ jobs:
     needs: job1
     strategy:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
-    runs-on: ${{matrix.servername}}
+    runs-on: development-test1
+#     ${{matrix.servername}}
 
     steps:
       - name : Nameee!!!!
