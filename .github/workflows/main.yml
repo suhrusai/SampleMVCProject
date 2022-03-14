@@ -13,7 +13,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  REPO_SECRET : ${{ secrets.REPO_SECRET }}
   WEBAPP_NAME: SampleMVCProject.sln     # set this to your application's name
   WEBAPP_PACKAGE_PATH: 'published1'      # set this to the path to your web app project, defaults to the repository root
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -24,7 +23,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo '::set-output name=matrix::{"include":[{"project":"foo","label":"deployment-test11"},{"project":"bar","label":"deployment-test11"}]}'
+        run: echo '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployment-test1"},{"project":"bar","servername":"deployment-test11"}]}'
   job2:
     needs: job1
     strategy:
