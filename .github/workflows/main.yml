@@ -32,12 +32,12 @@ jobs:
     needs: job1
     strategy:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
-    runs-on: ${{matrix.servername}}
+    runs-on: ${{matrix.label}}
 #     ${{matrix.servername}}
 
     steps:
       - name : Nameee!!!!
-        run : echo ${{matrix.project}}
+        run : echo ${{matrix.servername}}
 #     steps:
 #       - run: build
 #   # This workflow contains a single job called "build"
