@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name : Nameee!!!!
-        run : echo ${{matrix.config}}
+        run : echo ${{matrix.project}}
 #     steps:
 #       - run: build
 #   # This workflow contains a single job called "build"
