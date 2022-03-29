@@ -19,107 +19,109 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - id: set-matrix
-        run: |
-          $a = Get-content main.json -Raw
-          $a = $a -replace '(^\s+|\s+$)','' -replace '\s+','' -replace '\n',""
-          echo "::set-output name=matrix::$a"
-#         '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployment-test1"},{"project":"bar","servername":"deployment-test1"}]}'
-  job2:
-    needs: job1
-    strategy:
-      matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
-    runs-on: ${{matrix.label}}
-#     ${{matrix.servername}}
-
-    steps:
-      - name : Nameee!!!!
-        run : echo ${{matrix.servername}}
-#     steps:
-#       - run: build
-#   # This workflow contains a single job called "build"
-#   build:
-#     environment : Test
-#     # The type of runner that the job will run on
-#     runs-on: self-hosted
-#     outputs: 
-# #       matrix: ${{ steps.set-matrix.outputs.matrix }}
-#       matrix-json: ${{ steps.set-matrix.outputs.matrix }}
-
-#     # Steps represent a sequence of tasks that will be executed as part of the job
-#     steps:
-#       - name: Github Secret
-#         run: echo ${{ env.REPO_SECRET }}
-#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#       - uses: actions/checkout@v2
-#       - name: Setup MSBUild
-#         uses: microsoft/setup-msbuild@v1.1
+      - run : echo hello world
+      
 #       - id: set-matrix
-#         run: echo ::set-output name=matrix::${{ env.REPO_SECRET }}
-#       - name: Setup NUGet
-#         uses: NuGet/setup-nuget@v1.0.5
-       
-#       - name: Adding Factset Packagesource
-#         run : nuget sources add -name "Factset" -Source http://artifactory.factset.com/artifactory/api/nuget/nuget
-
-
-# #         run: dotnet nuget add source 'http://artifactory.factset.com/artifactory/api/nuget/nuget' --name 'Factset'
-#       - name: Creating matrix
 #         run: |
-#           $Jobs = @()
+#           $a = Get-content main.json -Raw
+#           $a = $a -replace '(^\s+|\s+$)','' -replace '\s+','' -replace '\n',""
+#           echo "::set-output name=matrix::$a"
+#         '::set-output name=matrix::{"include":[{"project":"foo","servername":"deployment-test1"},{"project":"bar","servername":"deployment-test1"}]}'
+#   job2:
+#     needs: job1
+#     strategy:
+#       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
+#     runs-on: ${{matrix.label}}
+# #     ${{matrix.servername}}
 
-#           @('seployment-test1') | ForEach-Object {
-#             $Jobs += @{
-#               computername = "$_"
-#             }
-#           }
-
-#           Write-Host ::set-output name=matrix::$($Jobs | ConvertTo-JSON -Compress)
-#       - name: Restore NuGet Packages
-#         run: nuget restore SampleMVCProject.sln
-        
-#       - name: Build Solution
-#         run: msbuild SampleMVCProject.sln /p:Configuration=Release
-
-#       - name: Build and Publish to folder
-#         run: msbuild ${{ env.WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
-#       - name :  Zip Bin folder
-#         run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
-#       - name: Publish artifacts
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: "Build.zip"
-#           path: "./archive.zip"
-# #       -name: 
-# #   deploy_on_omen:
-# #     needs: build
-# #     runs-on : [deployment-test]
+#     steps:
+#       - name : Nameee!!!!
+#         run : echo ${{matrix.servername}}
 # #     steps:
-# #       - name: Download Artifacts
-# #         uses: actions/download-artifact@v2
+# #       - run: build
+# #   # This workflow contains a single job called "build"
+# #   build:
+# #     environment : Test
+# #     # The type of runner that the job will run on
+# #     runs-on: self-hosted
+# #     outputs: 
+# # #       matrix: ${{ steps.set-matrix.outputs.matrix }}
+# #       matrix-json: ${{ steps.set-matrix.outputs.matrix }}
+
+# #     # Steps represent a sequence of tasks that will be executed as part of the job
+# #     steps:
+# #       - name: Github Secret
+# #         run: echo ${{ env.REPO_SECRET }}
+# #      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+# #       - uses: actions/checkout@v2
+# #       - name: Setup MSBUild
+# #         uses: microsoft/setup-msbuild@v1.1
+# #       - id: set-matrix
+# #         run: echo ::set-output name=matrix::${{ env.REPO_SECRET }}
+# #       - name: Setup NUGet
+# #         uses: NuGet/setup-nuget@v1.0.5
+       
+# #       - name: Adding Factset Packagesource
+# #         run : nuget sources add -name "Factset" -Source http://artifactory.factset.com/artifactory/api/nuget/nuget
+
+
+# # #         run: dotnet nuget add source 'http://artifactory.factset.com/artifactory/api/nuget/nuget' --name 'Factset'
+# #       - name: Creating matrix
+# #         run: |
+# #           $Jobs = @()
+
+# #           @('seployment-test1') | ForEach-Object {
+# #             $Jobs += @{
+# #               computername = "$_"
+# #             }
+# #           }
+
+# #           Write-Host ::set-output name=matrix::$($Jobs | ConvertTo-JSON -Compress)
+# #       - name: Restore NuGet Packages
+# #         run: nuget restore SampleMVCProject.sln
+        
+# #       - name: Build Solution
+# #         run: msbuild SampleMVCProject.sln /p:Configuration=Release
+
+# #       - name: Build and Publish to folder
+# #         run: msbuild ${{ env.WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
+# #       - name :  Zip Bin folder
+# #         run : Compress-Archive ".\bin" -DestinationPath "archive.zip"
+# #       - name: Publish artifacts
+# #         uses: actions/upload-artifact@v2
 # #         with:
-# #           name: "Hello.zip"
+# #           name: "Build.zip"
+# #           path: "./archive.zip"
+# # #       -name: 
+# # #   deploy_on_omen:
+# # #     needs: build
+# # #     runs-on : [deployment-test]
+# # #     steps:
+# # #       - name: Download Artifacts
+# # #         uses: actions/download-artifact@v2
+# # #         with:
+# # #           name: "Hello.zip"
 
-#   deploy:
-#       needs: build
-#       strategy:
-#         fail-fast: false
-#         matrix:
-#           include: ${{ fromJson(needs.matrix.outputs.matrix-json) }}
-#       runs-on: ${{needs.build.outputs.matrix}}
-# #     strategy:
-#       steps:
-#         - name : matrix output
-#           run: echo ${{needs.build.outputs.matrix}}
-#         - name: Download Artifacts
-#           uses: actions/download-artifact@v2
-#           with:
-#             name: "Build.zip"
-#         - name: Github Secret
-#           run: echo {{ secret.SERVER_NAMES }}
-#         - name: Decompress download build zip
-#           run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
+# #   deploy:
+# #       needs: build
+# #       strategy:
+# #         fail-fast: false
+# #         matrix:
+# #           include: ${{ fromJson(needs.matrix.outputs.matrix-json) }}
+# #       runs-on: ${{needs.build.outputs.matrix}}
+# # #     strategy:
+# #       steps:
+# #         - name : matrix output
+# #           run: echo ${{needs.build.outputs.matrix}}
+# #         - name: Download Artifacts
+# #           uses: actions/download-artifact@v2
+# #           with:
+# #             name: "Build.zip"
+# #         - name: Github Secret
+# #           run: echo {{ secret.SERVER_NAMES }}
+# #         - name: Decompress download build zip
+# #           run : Expand-Archive -Path ".\archive.zip" -DestinationPath "C:\" -Force
 
-#        #   with:
-#         #   name: webapp
-#          #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
+# #        #   with:
+# #         #   name: webapp
+# #          #  path: ${{ env.WEBAPP_PACKAGE_PATH }}  
