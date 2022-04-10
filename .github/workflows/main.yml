@@ -20,7 +20,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - run : echo hello world
-      - run : ${{toJSON(github.event)}}
+      - run : ${{github.event}}
 #       - id: set-matrix
 #         run: |
 #           $a = Get-content main.json -Raw
