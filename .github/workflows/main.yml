@@ -20,7 +20,8 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - run : echo hello world
-      - run : Write-Host ${{ github.event.client_payload.number}}
+      - run : $a = ${{ github.event.client_payload.number}} 
+      - run : $a
 #       - id: set-matrix
 #         run: |
 #           $a = Get-content main.json -Raw
