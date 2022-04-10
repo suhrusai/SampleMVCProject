@@ -21,7 +21,7 @@ jobs:
     steps:
       - run : echo hello world
       - run : $a = ${{ github.event.client_payload.number}} 
-      - run : $a
+      - run : Write-Host $a
 #       - id: set-matrix
 #         run: |
 #           $a = Get-content main.json -Raw
