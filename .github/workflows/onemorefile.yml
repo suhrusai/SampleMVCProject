@@ -3,7 +3,10 @@ on:
     workflow_run:
         workflows: ["main"]
         types: [completed]
-  
+    workflow_dispatch:
+    repository_dispatch:
+        types:
+          - webhook
 jobs:
     on-success:
         runs-on: [deployment-test1]
