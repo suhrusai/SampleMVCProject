@@ -20,7 +20,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - run : echo hello world
-      - run : $a = ${{ github.event.client_payload}} 
+      - run : $a = ${{ github.event.client_payload.number}} 
       - run : $a
 #       - id: set-matrix
 #         run: |
