@@ -23,9 +23,9 @@ jobs:
       - run : $a = ${{ github.event.client_payload.number}} 
       - run : Write-Host $a
   job2:
-    strategy:
-      matrix:
-        os : ['self-hosted', 'Windows' ,'X64', 'server1']
+#     strategy:
+#       matrix:
+#         os : ['self-hosted', 'Windows' ,'X64', 'server1']
     runs-on: ['self-hosted', 'Windows' ,'X64', 'server1']
     steps:
       - run: echo "hello world"
