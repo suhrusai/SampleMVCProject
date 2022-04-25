@@ -35,7 +35,7 @@ jobs:
     needs: job1
     strategy:
       matrix: ${{fromJSON(needs.build.outputs.deployment-matrix)}}
-    runs-on: ${{fromJson(matrix.os)}}
+    runs-on: self-hosted
     steps:
       - run: echo "hello world"
     
