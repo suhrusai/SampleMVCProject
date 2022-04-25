@@ -25,8 +25,8 @@ jobs:
   job2:
     strategy:
       matrix:
-        os : ['self-hosted', 'Windows' ,'X64' , 'server1']
-    runs-on: ${{matrix.os}}
+        os : ['self-hosted', 'Windows' ,'X64', 'server1']
+    runs-on: ['${{matrix.os}}','Windows']
     steps:
       - run: echo "hello world"
     
