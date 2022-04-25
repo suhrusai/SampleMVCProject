@@ -25,7 +25,7 @@ jobs:
       - name : Set deployment servers matrix
         id: deployment-matrix
         run: |
-          $a = (https://localhost:44356/api/github/mdts/job-news-email-stats-importer/runnersv2"  -UseBasicParsing).content
+          $a = ("https://localhost:44356/api/github/mdts/job-news-email-stats-importer/runnersv2"  -UseBasicParsing).content
           Write-Host $a
           if($a -eq '{"message":"Error"}'){ Throw "Error in fetching deployment details"}
           if($a -eq '{"include":[]}'){ echo "::set-output name=isPresent::false"}
