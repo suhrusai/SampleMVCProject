@@ -24,9 +24,9 @@ jobs:
       - run : Write-Host $a
       - name : Set deployment servers matrix
         id: deployment-matrix
-  #          $a = ( Invoke-WebRequest "https://localhost:44356/api/github/mdts/job-news-email-stats-importer/runnersv2"  -UseBasicParsing).content
+  #          $a = (Invoke-WebRequest "http://164.55.120.194:85/deploymentjson/266c25a3-48cd-4bbc-ba61-37ca193259b2"  -UseBasicParsing).content
         run: |
-          $a = (Invoke-WebRequest "http://164.55.120.194:85/deploymentjson/266c25a3-48cd-4bbc-ba61-37ca193259b2"  -UseBasicParsing).content
+          $a = ( Invoke-WebRequest "https://localhost:44356/api/github/mdts/job-news-email-stats-importer/runnersv2"  -UseBasicParsing).content
           Write-Host $a
           if($a -eq '{"message":"Error"}'){ Throw "Error in fetching deployment details"}
           if($a -eq '{"include":[]}'){ echo "::set-output name=isPresent::false"}
