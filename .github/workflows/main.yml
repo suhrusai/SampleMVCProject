@@ -17,15 +17,24 @@ jobs:
   job1:
     runs-on: windows-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      deployment-matrix: ${{ steps.deployment-matrix.outputs.matrix }}
     steps:
       - run : echo hello world
       - run : $a = ${{ github.event.client_payload.number}} 
       - run : Write-Host $a
+      - name : Set deployment servers matrix
+        id: deployment-matrix
+        run: |
+          $a = (https://localhost:44356/api/github/mdts/job-news-email-stats-importer/runnersv2"  -UseBasicParsing).content
+          Write-Host $a
+          if($a -eq '{"message":"Error"}'){ Throw "Error in fetching deployment details"}
+          if($a -eq '{"include":[]}'){ echo "::set-output name=isPresent::false"}
+          else { echo "::set-output name=isPresent::true"}
+          echo "::set-output name=matrix::$a"
   job2:
+    needs: job1
     strategy:
-      matrix:
-        os : ["['self-hosted', 'Windows' ,'X64', 'server1']","['self-hosted', 'Windows' ,'X64', 'server2']"]
+      matrix: ${{fromJSON(needs.build.outputs.deployment-matrix)}}
     runs-on: ${{fromJson(matrix.os)}}
     steps:
       - run: echo "hello world"
