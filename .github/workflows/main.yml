@@ -14,7 +14,7 @@ env:
   WEBAPP_PACKAGE_PATH: 'published1'      # set this to the path to your web app project, defaults to the repository root
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  job1:
+  build:
     runs-on: self-hosted
     outputs:
       deployment-matrix: ${{ steps.deployment-matrix.outputs.matrix }}
@@ -33,7 +33,7 @@ jobs:
           else { echo "::set-output name=isPresent::true"}
           echo "::set-output name=matrix::$a"
   job2:
-    needs: job1
+    needs: build
     strategy:
       matrix: ${{fromJSON(needs.build.outputs.deployment-matrix)}}
     runs-on: self-hosted
